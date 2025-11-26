@@ -1,7 +1,7 @@
 {
 	"name": "@sanxing/rhooks",
-	"version": "1.0.0",
-	"description": "A collection of useful React hooks built with TypeScript",
+	"version": "1.1.0",
+	"description": "一个基于 React Hooks 的工具库",
 	"type": "module",
 	"main": "./dist/index.js",
 	"module": "./dist/index.js",

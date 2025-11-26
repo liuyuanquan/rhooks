@@ -17,4 +17,5 @@ export { useMount } from './useMount'
 export { useUnmount } from './useUnmount'
 export { useUpdateEffect } from './useUpdateEffect'
 export { useHover } from './useHover'
+export { useScroll } from './useScroll'
 

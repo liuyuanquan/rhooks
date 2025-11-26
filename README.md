@@ -28,6 +28,7 @@ yarn add rhooks
 - [`useMount`](#usemount) - Run effect on mount only
 - [`useUnmount`](#useunmount) - Run effect on unmount only
 - [`useUpdateEffect`](#useupdateeffect) - Run effect on updates only
+- [`useScroll`](#usescroll) - Get scroll position of an element
 
 ## Hook Details
 
@@ -217,6 +218,39 @@ import { useUpdateEffect } from "rhooks";
 useUpdateEffect(() => {
 	console.log("Updated:", count);
 }, [count]);
+```
+
+### useScroll
+
+获取元素的滚动位置。
+
+```tsx
+import { useScroll } from "rhooks";
+import React, { useRef } from "react";
+
+function Demo() {
+	const scrollRef = useRef(null);
+	const scroll = useScroll(scrollRef);
+
+	return (
+		<div>
+			<p>滚动位置: {JSON.stringify(scroll)}</p>
+			<div
+				style={{
+					width: 300,
+					height: 200,
+					border: "1px solid #e8e8e8",
+					overflow: "auto",
+				}}
+				ref={scrollRef}
+			>
+				<div style={{ height: 500, width: 500 }}>
+					这是一个可滚动的区域，请尝试滚动查看效果
+				</div>
+			</div>
+		</div>
+	);
+}
 ```
 
 ## License
