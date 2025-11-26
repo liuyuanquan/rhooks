@@ -1,0 +1,224 @@
+# rhooks
+
+A collection of useful React hooks built with TypeScript.
+
+## Installation
+
+```bash
+npm install rhooks
+# or
+pnpm add rhooks
+# or
+yarn add rhooks
+```
+
+## Available Hooks
+
+- [`useToggle`](#usetoggle) - Toggle boolean values
+- [`useDebounce`](#usedebounce) - Debounce value changes
+- [`useThrottle`](#usethrottle) - Throttle function execution
+- [`useLocalStorage`](#uselocalstorage) - Manage localStorage values
+- [`usePrevious`](#useprevious) - Access previous prop or state values
+- [`useClickOutside`](#useclickoutside) - Detect clicks outside of an element
+- [`useWindowSize`](#usewindowsize) - Get window dimensions
+- [`useCounter`](#usecounter) - Counter with increment, decrement, reset
+- [`useTimeout`](#usetimeout) - setTimeout wrapper
+- [`useInterval`](#useinterval) - setInterval wrapper
+- [`useFetch`](#usefetch) - Data fetching with loading and error states
+- [`useMount`](#usemount) - Run effect on mount only
+- [`useUnmount`](#useunmount) - Run effect on unmount only
+- [`useUpdateEffect`](#useupdateeffect) - Run effect on updates only
+
+## Hook Details
+
+### useToggle
+
+用于切换布尔值的 hook。
+
+```tsx
+import { useToggle } from 'rhooks'
+
+const [isOpen, toggle, open, close] = useToggle(false)
+
+<button onClick={toggle}>Toggle</button>
+<button onClick={open}>Open</button>
+<button onClick={close}>Close</button>
+```
+
+### useDebounce
+
+防抖 hook，延迟执行。
+
+```tsx
+import { useDebounce } from "rhooks";
+
+const [input, setInput] = useState("");
+const debouncedInput = useDebounce(input, 500);
+
+useEffect(() => {
+	// 在用户停止输入 500ms 后执行
+	console.log(debouncedInput);
+}, [debouncedInput]);
+```
+
+### useThrottle
+
+节流 hook，限制执行频率。
+
+```tsx
+import { useThrottle } from "rhooks";
+
+const [scrollY, setScrollY] = useState(0);
+const throttledScrollY = useThrottle(scrollY, 100);
+```
+
+### useLocalStorage
+
+本地存储 hook。
+
+```tsx
+import { useLocalStorage } from 'rhooks'
+
+const [user, setUser, removeUser] = useLocalStorage('user', { name: 'John' })
+
+<button onClick={() => setUser({ name: 'Jane' })}>Update</button>
+<button onClick={removeUser}>Remove</button>
+```
+
+### usePrevious
+
+获取上一次的值。
+
+```tsx
+import { usePrevious } from "rhooks";
+
+const [count, setCount] = useState(0);
+const prevCount = usePrevious(count);
+```
+
+### useClickOutside
+
+点击外部区域检测。
+
+```tsx
+import { useClickOutside } from "rhooks";
+
+const ref = useClickOutside(() => {
+	setIsOpen(false);
+});
+
+return <div ref={ref}>Content</div>;
+```
+
+### useWindowSize
+
+获取窗口尺寸。
+
+```tsx
+import { useWindowSize } from "rhooks";
+
+const { width, height } = useWindowSize();
+
+return (
+	<div>
+		Window size: {width} x {height}
+	</div>
+);
+```
+
+### useCounter
+
+计数器 hook。
+
+```tsx
+import { useCounter } from 'rhooks'
+
+const [count, increment, decrement, reset, setCount] = useCounter(0)
+
+<button onClick={increment}>+</button>
+<button onClick={decrement}>-</button>
+<button onClick={reset}>Reset</button>
+```
+
+### useTimeout
+
+定时器 hook。
+
+```tsx
+import { useTimeout } from "rhooks";
+
+const clear = useTimeout(() => {
+	console.log("Executed after 1 second");
+}, 1000);
+
+// 可以手动清除
+clear();
+```
+
+### useInterval
+
+循环定时器 hook。
+
+```tsx
+import { useInterval } from "rhooks";
+
+const [count, setCount] = useState(0);
+
+useInterval(() => {
+	setCount(count + 1);
+}, 1000);
+```
+
+### useFetch
+
+数据获取 hook。
+
+```tsx
+import { useFetch } from "rhooks";
+
+const { data, loading, error, refetch } = useFetch<User>("/api/user");
+
+if (loading) return <div>Loading...</div>;
+if (error) return <div>Error: {error.message}</div>;
+return <div>{data?.name}</div>;
+```
+
+### useMount
+
+组件挂载时执行。
+
+```tsx
+import { useMount } from "rhooks";
+
+useMount(() => {
+	console.log("Component mounted");
+});
+```
+
+### useUnmount
+
+组件卸载时执行。
+
+```tsx
+import { useUnmount } from "rhooks";
+
+useUnmount(() => {
+	console.log("Component unmounted");
+});
+```
+
+### useUpdateEffect
+
+只在依赖更新时执行的 effect，跳过首次渲染。
+
+```tsx
+import { useUpdateEffect } from "rhooks";
+
+useUpdateEffect(() => {
+	console.log("Updated:", count);
+}, [count]);
+```
+
+## License
+
+MIT
