@@ -1,18 +1,18 @@
 import { useEffect, useRef } from "react";
 
 type ClickAwayCallback = (event: MouseEvent | TouchEvent) => void;
-type RefType<T extends HTMLElement = HTMLElement> =
-	| React.RefObject<T>
-	| (React.RefObject<T> | null)[];
+type RefType = 
+	| React.RefObject<HTMLElement>
+	| (React.RefObject<HTMLElement> | null)[];
 
 /**
  * 监听目标元素外部的点击事件
  * @param callback 点击外部区域时触发的回调函数
  * @param targetRef 目标元素的 ref 或 ref 数组
  */
-export function useClickAway<T extends HTMLElement = HTMLElement>(
+export function useClickAway(
 	callback: ClickAwayCallback,
-	targetRef: RefType<T>
+	targetRef: RefType
 ): void {
 	const callbackRef = useRef<ClickAwayCallback>(callback);
 
@@ -29,7 +29,7 @@ export function useClickAway<T extends HTMLElement = HTMLElement>(
 			const refs = Array.isArray(targetRef) ? targetRef : [targetRef];
 			const targetElements = refs
 				.map((ref) => ref?.current)
-				.filter((el): el is T => el !== null);
+				.filter((el): el is HTMLElement => el !== null);
 
 			// 如果没有目标元素，则不执行回调
 			if (targetElements.length === 0) {
