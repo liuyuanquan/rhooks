@@ -1,5 +1,5 @@
 import React from "react";
-import { useScroll } from "@sanxing/rhooks";
+import { useScroll } from "@xumi/rhooks";
 
 const ScrollDemo: React.FC = () => {
 	const scrollRef = React.useRef<HTMLDivElement>(null);
