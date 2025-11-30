@@ -148,12 +148,22 @@ clear();
 
 ```tsx
 import { useInterval } from "rhooks";
+import { useState, useRef } from "react";
 
 const [count, setCount] = useState(0);
 
-useInterval(() => {
-	setCount(count + 1);
+// 基本用法
+const { clear } = useInterval(() => {
+  setCount(count + 1);
 }, 1000);
+
+// 立即执行的用法
+const { clear: clear2 } = useInterval(() => {
+  setCount(count + 1);
+}, 1000, { immediate: true });
+
+// 手动清除定时器
+clear();
 ```
 
 ### useFetch
@@ -270,3 +280,9 @@ function Demo() {
 ## License
 
 MIT
+
+## 更新日志
+
+### v1.1.2
+
+- 清理项目结构，移除未使用的 commit-helper.js 脚本文件和空的 scripts 目录

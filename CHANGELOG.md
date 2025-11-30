@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.2] - 2025-04-05
+
+### Removed
+
+- 移除未使用的 commit-helper.js 脚本文件
+- 移除空的 scripts 目录
+
+### Changed
+
+- 清理项目结构，移除不必要的文件
+
 ## [1.1.1] - 2025-04-05
 
 ### Added

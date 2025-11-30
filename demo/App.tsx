@@ -2,6 +2,8 @@ import ClickAwayDemo from "./components/ClickAwayDemo";
 import ScrollDemo from "./components/ScrollDemo";
 import MultiClickAwayDemo from "./components/MultiClickAwayDemo";
 import PopupDemo from "./components/PopupDemo";
+import IntervalDemo from "./components/IntervalDemo";
+import TimeoutDemo from "./components/TimeoutDemo";
 
 function App() {
 	return (
@@ -11,6 +13,8 @@ function App() {
 			<MultiClickAwayDemo />
 			<PopupDemo />
 			<ScrollDemo />
+			<IntervalDemo />
+			<TimeoutDemo />
 		</div>
 	);
 }
