@@ -19,7 +19,6 @@ yarn add rhooks
 - [`useThrottle`](#usethrottle) - Throttle function execution
 - [`useLocalStorage`](#uselocalstorage) - Manage localStorage values
 - [`usePrevious`](#useprevious) - Access previous prop or state values
-- [`useClickOutside`](#useclickoutside) - Detect clicks outside of an element
 - [`useClickAway`](#useclickaway) - Detect clicks outside of one or more elements
 - [`useWindowSize`](#usewindowsize) - Get window dimensions
 - [`useCounter`](#usecounter) - Counter with increment, decrement, reset
@@ -96,20 +95,6 @@ import { usePrevious } from "rhooks";
 
 const [count, setCount] = useState(0);
 const prevCount = usePrevious(count);
-```
-
-### useClickOutside
-
-点击外部区域检测。
-
-```tsx
-import { useClickOutside } from "rhooks";
-
-const ref = useClickOutside(() => {
-	setIsOpen(false);
-});
-
-return <div ref={ref}>Content</div>;
 ```
 
 ### useWindowSize
@@ -233,21 +218,21 @@ import { useClickAway } from "rhooks";
 // 单个目标元素
 const ref = useRef<HTMLDivElement>(null);
 useClickAway(() => {
-  setIsOpen(false);
+	setIsOpen(false);
 }, ref);
 
 // 多个目标元素
 const ref1 = useRef<HTMLDivElement>(null);
 const ref2 = useRef<HTMLButtonElement>(null);
 useClickAway(() => {
-  setIsOpen(false);
+	setIsOpen(false);
 }, [ref1, ref2]);
 
 return (
-  <div>
-    <button ref={ref2}>按钮</button>
-    <div ref={ref1}>内容区域</div>
-  </div>
+	<div>
+		<button ref={ref2}>按钮</button>
+		<div ref={ref1}>内容区域</div>
+	</div>
 );
 ```
 

@@ -7,7 +7,6 @@ export { useDebounce } from "./useDebounce";
 export { useThrottle } from "./useThrottle";
 export { useLocalStorage } from "./useLocalStorage";
 export { usePrevious } from "./usePrevious";
-export { useClickOutside } from "./useClickOutside";
 export { useWindowSize } from "./useWindowSize";
 export { useCounter } from "./useCounter";
 export { useTimeout } from "./useTimeout";
