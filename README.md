@@ -1,4 +1,4 @@
-# rhooks
+# @xumi/rhooks
 
 A collection of useful React hooks built with TypeScript.
 

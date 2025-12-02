@@ -1,5 +1,5 @@
 /*
- * rhooks - A collection of useful React hooks
+ * @xumi/rhooks - A collection of useful React hooks
  */
 
 export { useToggle } from "./useToggle";
