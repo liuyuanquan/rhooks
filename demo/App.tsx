@@ -9,6 +9,7 @@ import BooleanDemo from "./components/BooleanDemo";
 import LocalStorageStateDemo from "./components/LocalStorageStateDemo";
 import PreviousDemo from "./components/PreviousDemo";
 import ToggleDemo from "./components/ToggleDemo";
+import DebounceFnDemo from "./components/DebounceFnDemo";
 
 function App() {
 	return (
@@ -25,6 +26,7 @@ function App() {
 			<LocalStorageStateDemo />
 			<PreviousDemo />
 			<ToggleDemo />
+			<DebounceFnDemo />
 		</div>
 	);
 }

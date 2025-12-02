@@ -5,6 +5,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.1] - 2025-12-02
+
+### Added
+
+- 添加 useDebounceFn Hook，用于防抖执行函数
+  - 支持 run、cancel、flush 方法
+  - 支持配置 wait、leading、trailing、maxWait 选项
+  - 支持泛型类型
+- 添加 DebounceFnDemo 组件，展示 useDebounceFn Hook 的各种用法
+  - 基本用法示例
+  - Leading 模式示例
+  - MaxWait 限制示例
+  - 各种方法调用示例
+
 ## [1.2.0] - 2025-12-02
 
 ### Fixed
