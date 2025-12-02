@@ -4,8 +4,8 @@ import { usePrevious } from "../../src";
 // 定义变化记录的类型
 interface ChangeRecord {
 	property: string;
-	from: any;
-	to: any;
+	from: unknown;
+	to: unknown;
 }
 
 // 比较变化方向示例
@@ -92,7 +92,10 @@ const ObjectPropertyMonitor: React.FC = () => {
 		}
 	}, [user, previousUser]);
 
-	const updateUser = (field: keyof typeof user, value: any) => {
+	const updateUser = <K extends keyof typeof user>(
+		field: K,
+		value: (typeof user)[K]
+	) => {
 		setUser({
 			...user,
 			[field]: value,
