@@ -18,3 +18,4 @@ export { useUpdateEffect } from "./useUpdateEffect";
 export { useHover } from "./useHover";
 export { useScroll } from "./useScroll";
 export { useClickAway } from "./useClickAway";
+export { useRequest } from "./useRequest";

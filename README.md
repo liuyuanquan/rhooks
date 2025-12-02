@@ -154,13 +154,17 @@ const [count, setCount] = useState(0);
 
 // 基本用法
 const { clear } = useInterval(() => {
-  setCount(count + 1);
+	setCount(count + 1);
 }, 1000);
 
 // 立即执行的用法
-const { clear: clear2 } = useInterval(() => {
-  setCount(count + 1);
-}, 1000, { immediate: true });
+const { clear: clear2 } = useInterval(
+	() => {
+		setCount(count + 1);
+	},
+	1000,
+	{ immediate: true }
+);
 
 // 手动清除定时器
 clear();
@@ -217,6 +221,90 @@ useUpdateEffect(() => {
 ```
 
 ### useScroll
+
+### useRequest
+
+一个强大的异步数据管理 Hook，它将数据获取逻辑中的 loading 状态、data、error、请求、取消、刷新等所有环节都封装好了。
+
+#### API
+
+```tsx
+const { data, error, loading, run, cancel, refresh, reset } = useRequest(
+	service,
+	options
+);
+```
+
+##### 参数
+
+| 参数    | 说明                   | 类型                             | 默认值 |
+| ------- | ---------------------- | -------------------------------- | ------ |
+| service | 请求函数，返回 Promise | `(...args: any[]) => Promise<T>` | -      |
+| options | 配置项                 | `Options`                        | -      |
+
+##### Options
+
+| 参数          | 说明                               | 类型                                    | 默认值            |
+| ------------- | ---------------------------------- | --------------------------------------- | ----------------- |
+| manual        | 是否手动触发请求                   | `boolean`                               | `false`           |
+| defaultParams | 默认参数                           | `any[]`                                 | `[]`              |
+| refreshDeps   | 依赖数组，当依赖变化时自动重新请求 | `any[]`                                 | `[]`              |
+| cacheKey      | 缓存的键值，设置后会启用缓存       | `string`                                | `-`               |
+| cacheTime     | 缓存时间，单位为毫秒               | `number`                                | `300000` (5 分钟) |
+| onSuccess     | 请求成功时的回调                   | `(data: any, params: any[]) => void`    | `-`               |
+| onError       | 请求失败时的回调                   | `(error: Error, params: any[]) => void` | `-`               |
+| onFinally     | 请求完成时的回调（无论成功或失败） | `(params: any[]) => void`               | `-`               |
+
+##### 返回值
+
+| 参数    | 说明           | 类型                         |
+| ------- | -------------- | ---------------------------- |
+| data    | 请求返回的数据 | `T \| undefined`             |
+| error   | 请求错误信息   | `Error \| undefined`         |
+| loading | 请求加载状态   | `boolean`                    |
+| run     | 执行请求函数   | `(...params: any[]) => void` |
+| cancel  | 取消请求函数   | `() => void`                 |
+| refresh | 刷新请求函数   | `() => void`                 |
+| reset   | 重置状态函数   | `() => void`                 |
+
+#### 使用示例
+
+```tsx
+import { useRequest } from "rhooks";
+
+// 基本用法
+const { data, error, loading, run } = useRequest(async () => {
+	const response = await fetch("/api/users");
+	return response.json();
+});
+
+// 带参数的请求
+const { data, error, loading, run } = useRequest(
+	(userId) => fetch(`/api/users/${userId}`).then((res) => res.json()),
+	{
+		manual: true, // 手动触发
+	}
+);
+
+// 使用缓存
+const { data, loading } = useRequest(
+	() => fetch("/api/user-info").then((res) => res.json()),
+	{
+		cacheKey: "user-info",
+		cacheTime: 600000, // 10分钟
+	}
+);
+
+// 依赖刷新
+const userId = 1;
+const { data, refresh } = useRequest(
+	(id) => fetch(`/api/users/${id}`).then((res) => res.json()),
+	{
+		defaultParams: [userId],
+		refreshDeps: [userId],
+	}
+);
+```
 
 ### useClickAway
 

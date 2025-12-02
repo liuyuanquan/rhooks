@@ -5,6 +5,24 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.4] - 2025-12-02
+
+### Fixed
+
+- 修复 useRequest hook 中的 TypeScript 类型错误，将 any[] 替换为 unknown[]
+
+## [1.1.3] - 2025-04-05
+
+### Added
+
+- 添加 useRequest hook，一个强大的异步数据管理 Hook
+- 添加 useRequest hook 的文档和示例
+- 添加 useRequest 到导出模块
+
+### Changed
+
+- 简化 useRequest hook 的 Options 参数，移除 pollingInterval、debounceWait、refreshOnWindowFocus、focusTimespan 和 immediate 参数
+
 ## [1.1.2] - 2025-04-05
 
 ### Removed
