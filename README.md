@@ -2,6 +2,8 @@
 
 A collection of useful React hooks built with TypeScript.
 
+**English** | [中文](./README.zh-CN.md)
+
 ## Installation
 
 ```bash
@@ -36,7 +38,7 @@ yarn add @xumi/rhooks
 
 ### useToggle
 
-用于切换布尔值的 hook。
+Toggle boolean values.
 
 ```tsx
 import { useToggle } from '@xumi/rhooks'
@@ -50,7 +52,7 @@ const [isOpen, toggle, open, close] = useToggle(false)
 
 ### useBoolean
 
-用于管理布尔值状态的 hook，返回包含多个方法的对象。
+Manage boolean state with multiple methods.
 
 ```tsx
 import { useBoolean } from '@xumi/rhooks'
@@ -65,24 +67,24 @@ const [isOpen, { toggle, setTrue, setFalse, set }] = useBoolean(false)
 
 ### useLocalStorageState
 
-将状态存储在 localStorage 中的 hook，页面刷新后状态依然保持。
+Manage state with localStorage persistence. State persists after page refresh.
 
 ```tsx
 import { useLocalStorageState } from "@xumi/rhooks";
 
-// 基本用法
+// Basic usage
 const [count, setCount] = useLocalStorageState<number>("count", {
 	defaultValue: 0,
 });
 
-// 使用自定义序列化和反序列化
+// Custom serializer and deserializer
 const [user, setUser] = useLocalStorageState<User>("user", {
 	defaultValue: { name: "John" },
 	serializer: (value) => JSON.stringify(value),
 	deserializer: (value) => JSON.parse(value),
 });
 
-// 使用函数作为默认值
+// Function as default value
 const [data, setData] = useLocalStorageState<Data>("data", {
 	defaultValue: () => fetchInitialData(),
 });
@@ -90,7 +92,7 @@ const [data, setData] = useLocalStorageState<Data>("data", {
 
 ### useDebounceFn
 
-防抖函数 Hook，用于防抖执行函数。
+Debounce function execution.
 
 ```tsx
 import { useDebounceFn } from "@xumi/rhooks";
@@ -102,26 +104,26 @@ const { run, cancel, flush } = useDebounceFn(
 	{ wait: 500 }
 );
 
-// 调用 run 来触发防抖
+// Call run to trigger debounce
 run("hello");
 
-// 取消待执行的防抖函数
+// Cancel pending debounced function
 cancel();
 
-// 立即执行并返回结果
+// Execute immediately and return result
 const result = flush();
 ```
 
-#### 配置选项
+#### Options
 
-- `wait`: 防抖等待时间（毫秒），默认 1000ms
-- `leading`: 是否在延迟开始前调用函数，默认 false
-- `trailing`: 是否在延迟结束后调用函数，默认 true
-- `maxWait`: 最大等待时间（毫秒），用于设置防抖函数的最大延迟时间
+- `wait`: Debounce wait time in milliseconds, default 1000ms
+- `leading`: Whether to call function before delay starts, default false
+- `trailing`: Whether to call function after delay ends, default true
+- `maxWait`: Maximum wait time in milliseconds, used to set the maximum delay time for debounced function
 
 ### useThrottleFn
 
-节流函数 Hook，用于节流执行函数。在固定时间间隔内最多执行一次。
+Throttle function execution. Execute at most once within a fixed time interval.
 
 ```tsx
 import { useThrottleFn } from "@xumi/rhooks";
@@ -133,30 +135,30 @@ const { run, cancel, flush } = useThrottleFn(
 	{ wait: 500 }
 );
 
-// 调用 run 来触发节流
+// Call run to trigger throttle
 run("hello");
 
-// 取消待执行的节流函数
+// Cancel pending throttled function
 cancel();
 
-// 立即执行并返回结果
+// Execute immediately and return result
 const result = flush();
 ```
 
-#### 配置选项
+#### Options
 
-- `wait`: 节流等待时间（毫秒），默认 1000ms
-- `leading`: 是否在延迟开始前调用函数，默认 true
-- `trailing`: 是否在延迟结束后调用函数，默认 true
+- `wait`: Throttle wait time in milliseconds, default 1000ms
+- `leading`: Whether to call function before delay starts, default true
+- `trailing`: Whether to call function after delay ends, default true
 
-#### 与 useDebounceFn 的区别
+#### Difference from useDebounceFn
 
-- **防抖（Debounce）**：在事件停止触发后执行，适合搜索框输入、窗口 resize 等场景
-- **节流（Throttle）**：在固定时间间隔内最多执行一次，适合滚动事件、鼠标移动等场景
+- **Debounce**: Execute after events stop triggering, suitable for search input, window resize, etc.
+- **Throttle**: Execute at most once within a fixed time interval, suitable for scroll events, mouse movement, etc.
 
 ### usePrevious
 
-获取上一次的值。
+Access previous prop or state values.
 
 ```tsx
 import { usePrevious } from "@xumi/rhooks";
@@ -183,7 +185,7 @@ return (
 
 ### useCounter
 
-计数器 hook。
+Counter hook with increment, decrement, and reset.
 
 ```tsx
 import { useCounter } from '@xumi/rhooks'
@@ -197,7 +199,7 @@ const [count, increment, decrement, reset, setCount] = useCounter(0)
 
 ### useTimeout
 
-定时器 hook。
+setTimeout wrapper hook.
 
 ```tsx
 import { useTimeout } from "@xumi/rhooks";
@@ -206,13 +208,13 @@ const clear = useTimeout(() => {
 	console.log("Executed after 1 second");
 }, 1000);
 
-// 可以手动清除
+// Can be manually cleared
 clear();
 ```
 
 ### useInterval
 
-循环定时器 hook。
+setInterval wrapper hook.
 
 ```tsx
 import { useInterval } from "@xumi/rhooks";
@@ -220,12 +222,12 @@ import { useState, useRef } from "react";
 
 const [count, setCount] = useState(0);
 
-// 基本用法
+// Basic usage
 const { clear } = useInterval(() => {
 	setCount(count + 1);
 }, 1000);
 
-// 立即执行的用法
+// Immediate execution
 const { clear: clear2 } = useInterval(
 	() => {
 		setCount(count + 1);
@@ -234,13 +236,13 @@ const { clear: clear2 } = useInterval(
 	{ immediate: true }
 );
 
-// 手动清除定时器
+// Manually clear the timer
 clear();
 ```
 
 ### useMount
 
-组件挂载时执行。
+Run effect on mount only.
 
 ```tsx
 import { useMount } from "@xumi/rhooks";
@@ -252,7 +254,7 @@ useMount(() => {
 
 ### useUnmount
 
-组件卸载时执行。
+Run effect on unmount only.
 
 ```tsx
 import { useUnmount } from "@xumi/rhooks";
@@ -264,7 +266,7 @@ useUnmount(() => {
 
 ### useUpdateEffect
 
-只在依赖更新时执行的 effect，跳过首次渲染。
+Run effect on updates only, skip initial render.
 
 ```tsx
 import { useUpdateEffect } from "@xumi/rhooks";
@@ -276,7 +278,7 @@ useUpdateEffect(() => {
 
 ### useScroll
 
-获取元素的滚动位置。
+Get scroll position of an element.
 
 ```tsx
 import { useScroll } from "@xumi/rhooks";
@@ -288,7 +290,7 @@ function Demo() {
 
 	return (
 		<div>
-			<p>滚动位置: {JSON.stringify(scroll)}</p>
+			<p>Scroll position: {JSON.stringify(scroll)}</p>
 			<div
 				style={{
 					width: 300,
@@ -299,7 +301,7 @@ function Demo() {
 				ref={scrollRef}
 			>
 				<div style={{ height: 500, width: 500 }}>
-					这是一个可滚动的区域，请尝试滚动查看效果
+					This is a scrollable area, try scrolling to see the effect
 				</div>
 			</div>
 		</div>
@@ -309,7 +311,7 @@ function Demo() {
 
 ### useHover
 
-鼠标悬停状态 hook，用于检测元素是否被鼠标悬停。
+Detect mouse hover state.
 
 ```tsx
 import { useHover } from "@xumi/rhooks";
@@ -317,13 +319,13 @@ import { useHover } from "@xumi/rhooks";
 function Demo() {
 	const [ref, isHovered] = useHover();
 
-	return <div ref={ref}>{isHovered ? "鼠标悬停中" : "鼠标未悬停"}</div>;
+	return <div ref={ref}>{isHovered ? "Hovering" : "Not hovering"}</div>;
 }
 ```
 
 ### useRequest
 
-一个强大的异步数据管理 Hook，它将数据获取逻辑中的 loading 状态、data、error、请求、取消、刷新等所有环节都封装好了。
+A powerful async data management Hook that encapsulates all aspects of data fetching logic including loading state, data, error, request, cancel, refresh, etc.
 
 #### API
 
@@ -334,67 +336,67 @@ const { data, error, loading, run, cancel, refresh, reset } = useRequest(
 );
 ```
 
-##### 参数
+##### Parameters
 
-| 参数    | 说明                   | 类型                             | 默认值 |
-| ------- | ---------------------- | -------------------------------- | ------ |
-| service | 请求函数，返回 Promise | `(...args: any[]) => Promise<T>` | -      |
-| options | 配置项                 | `Options`                        | -      |
+| Parameter | Description                        | Type                             | Default |
+| --------- | ---------------------------------- | -------------------------------- | ------- |
+| service   | Request function returning Promise | `(...args: any[]) => Promise<T>` | -       |
+| options   | Configuration options              | `Options`                        | -       |
 
 ##### Options
 
-| 参数          | 说明                               | 类型                                    | 默认值            |
-| ------------- | ---------------------------------- | --------------------------------------- | ----------------- |
-| manual        | 是否手动触发请求                   | `boolean`                               | `false`           |
-| defaultParams | 默认参数                           | `any[]`                                 | `[]`              |
-| refreshDeps   | 依赖数组，当依赖变化时自动重新请求 | `any[]`                                 | `[]`              |
-| cacheKey      | 缓存的键值，设置后会启用缓存       | `string`                                | `-`               |
-| cacheTime     | 缓存时间，单位为毫秒               | `number`                                | `300000` (5 分钟) |
-| onSuccess     | 请求成功时的回调                   | `(data: any, params: any[]) => void`    | `-`               |
-| onError       | 请求失败时的回调                   | `(error: Error, params: any[]) => void` | `-`               |
-| onFinally     | 请求完成时的回调（无论成功或失败） | `(params: any[]) => void`               | `-`               |
+| Parameter     | Description                                       | Type                                    | Default              |
+| ------------- | ------------------------------------------------- | --------------------------------------- | -------------------- |
+| manual        | Whether to trigger request manually               | `boolean`                               | `false`              |
+| defaultParams | Default parameters                                | `any[]`                                 | `[]`                 |
+| refreshDeps   | Dependency array, auto re-request on change       | `any[]`                                 | `[]`                 |
+| cacheKey      | Cache key, enables caching when set               | `string`                                | `-`                  |
+| cacheTime     | Cache time in milliseconds                        | `number`                                | `300000` (5 minutes) |
+| onSuccess     | Callback on successful request                    | `(data: any, params: any[]) => void`    | `-`                  |
+| onError       | Callback on failed request                        | `(error: Error, params: any[]) => void` | `-`                  |
+| onFinally     | Callback when request completes (success or fail) | `(params: any[]) => void`               | `-`                  |
 
-##### 返回值
+##### Return Value
 
-| 参数    | 说明           | 类型                         |
-| ------- | -------------- | ---------------------------- |
-| data    | 请求返回的数据 | `T \| undefined`             |
-| error   | 请求错误信息   | `Error \| undefined`         |
-| loading | 请求加载状态   | `boolean`                    |
-| run     | 执行请求函数   | `(...params: any[]) => void` |
-| cancel  | 取消请求函数   | `() => void`                 |
-| refresh | 刷新请求函数   | `() => void`                 |
-| reset   | 重置状态函数   | `() => void`                 |
+| Parameter | Description               | Type                         |
+| --------- | ------------------------- | ---------------------------- |
+| data      | Request response data     | `T \| undefined`             |
+| error     | Request error information | `Error \| undefined`         |
+| loading   | Request loading state     | `boolean`                    |
+| run       | Execute request function  | `(...params: any[]) => void` |
+| cancel    | Cancel request function   | `() => void`                 |
+| refresh   | Refresh request function  | `() => void`                 |
+| reset     | Reset state function      | `() => void`                 |
 
-#### 使用示例
+#### Usage Examples
 
 ```tsx
 import { useRequest } from "@xumi/rhooks";
 
-// 基本用法
+// Basic usage
 const { data, error, loading, run } = useRequest(async () => {
 	const response = await fetch("/api/users");
 	return response.json();
 });
 
-// 带参数的请求
+// Request with parameters
 const { data, error, loading, run } = useRequest(
 	(userId) => fetch(`/api/users/${userId}`).then((res) => res.json()),
 	{
-		manual: true, // 手动触发
+		manual: true, // Manual trigger
 	}
 );
 
-// 使用缓存
+// Using cache
 const { data, loading } = useRequest(
 	() => fetch("/api/user-info").then((res) => res.json()),
 	{
 		cacheKey: "user-info",
-		cacheTime: 600000, // 10分钟
+		cacheTime: 600000, // 10 minutes
 	}
 );
 
-// 依赖刷新
+// Dependency refresh
 const userId = 1;
 const { data, refresh } = useRequest(
 	(id) => fetch(`/api/users/${id}`).then((res) => res.json()),
@@ -407,18 +409,18 @@ const { data, refresh } = useRequest(
 
 ### useClickAway
 
-点击外部区域检测，支持单个或多个目标元素。
+Detect clicks outside of one or more target elements.
 
 ```tsx
 import { useClickAway } from "@xumi/rhooks";
 
-// 单个目标元素
+// Single target element
 const ref = useRef<HTMLDivElement>(null);
 useClickAway(() => {
 	setIsOpen(false);
 }, ref);
 
-// 多个目标元素
+// Multiple target elements
 const ref1 = useRef<HTMLDivElement>(null);
 const ref2 = useRef<HTMLButtonElement>(null);
 useClickAway(() => {
@@ -427,8 +429,8 @@ useClickAway(() => {
 
 return (
 	<div>
-		<button ref={ref2}>按钮</button>
-		<div ref={ref1}>内容区域</div>
+		<button ref={ref2}>Button</button>
+		<div ref={ref1}>Content Area</div>
 	</div>
 );
 ```

@@ -5,6 +5,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.5.2] - 2025-12-02
+
+### Changed
+
+- 优化 `package.json` 配置
+  - 添加 `sideEffects: false` 标记，便于 tree-shaking
+  - 添加 `engines` 字段，指定 Node.js 版本要求
+  - 优化 `exports` 字段，同时支持 ESM 和 CJS 格式
+  - 将 `main` 字段指向 CJS 格式以保持向后兼容
+  - 添加 `clean` 脚本用于清理构建产物
+  - 扩展 `keywords` 字段，添加更多关键词
+  - 明确 `files` 字段，列出要发布的文件
+  - 优化 `prepublishOnly` 脚本，添加类型检查
+  - 将 `react-dom` 从 `dependencies` 移至 `devDependencies`
+
 ## [1.5.0] - 2025-12-02
 
 ### Removed
