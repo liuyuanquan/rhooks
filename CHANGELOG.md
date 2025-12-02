@@ -5,6 +5,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.6] - 2025-12-02
+
+### Removed
+
+- 删除 useLocalStorage hook，由 useLocalStorageState 替代
+
+### Added
+
+- 添加 useLocalStorageState hook，将状态存储在 localStorage 中
+- 添加 LocalStorageStateDemo 组件，展示 useLocalStorageState 的各种用法
+
+### Updated
+
+- 更新 README.md，移除 useLocalStorage 相关文档
+- 更新 index.ts，移除 useLocalStorage 导出
+
 ## [1.1.5] - 2025-12-02
 
 ### Added

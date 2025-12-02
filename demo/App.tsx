@@ -6,6 +6,7 @@ import IntervalDemo from "./components/IntervalDemo";
 import TimeoutDemo from "./components/TimeoutDemo";
 import RequestDemo from "./components/RequestDemo";
 import BooleanDemo from "./components/BooleanDemo";
+import LocalStorageStateDemo from "./components/LocalStorageStateDemo";
 
 function App() {
 	return (
@@ -19,6 +20,7 @@ function App() {
 			<TimeoutDemo />
 			<RequestDemo />
 			<BooleanDemo />
+			<LocalStorageStateDemo />
 		</div>
 	);
 }

@@ -5,7 +5,6 @@
 export { useToggle } from "./useToggle";
 export { useDebounce } from "./useDebounce";
 export { useThrottle } from "./useThrottle";
-export { useLocalStorage } from "./useLocalStorage";
 export { usePrevious } from "./usePrevious";
 export { useWindowSize } from "./useWindowSize";
 export { useCounter } from "./useCounter";
@@ -20,3 +19,4 @@ export { useScroll } from "./useScroll";
 export { useBoolean } from "./useBoolean";
 export { useClickAway } from "./useClickAway";
 export { useRequest } from "./useRequest";
+export { useLocalStorageState } from "./useLocalStorageState";

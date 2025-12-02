@@ -18,7 +18,6 @@ yarn add rhooks
 - [`useBoolean`](#useboolean) - Manage boolean state with multiple methods
 - [`useDebounce`](#usedebounce) - Debounce value changes
 - [`useThrottle`](#usethrottle) - Throttle function execution
-- [`useLocalStorage`](#uselocalstorage) - Manage localStorage values
 - [`useLocalStorageState`](#uselocalstoragestate) - Manage state with localStorage persistence
 - [`usePrevious`](#useprevious) - Access previous prop or state values
 - [`useClickAway`](#useclickaway) - Detect clicks outside of one or more elements
@@ -113,19 +112,6 @@ import { useThrottle } from "rhooks";
 
 const [scrollY, setScrollY] = useState(0);
 const throttledScrollY = useThrottle(scrollY, 100);
-```
-
-### useLocalStorage
-
-本地存储 hook。
-
-```tsx
-import { useLocalStorage } from 'rhooks'
-
-const [user, setUser, removeUser] = useLocalStorage('user', { name: 'John' })
-
-<button onClick={() => setUser({ name: 'Jane' })}>Update</button>
-<button onClick={removeUser}>Remove</button>
 ```
 
 ### usePrevious
