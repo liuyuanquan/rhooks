@@ -28,14 +28,14 @@ const Demo: React.FC = () => {
 const MultiStateToggle: React.FC = () => {
 	const states = ["待办", "进行中", "已完成", "已取消"];
 	const [currentIndex, setCurrentIndex] = useState(0);
-	const [state, toggle] = useToggle(states[0], states[1]);
+	// 忽略未使用的 toggle 变量，只使用 set 方法实现多状态切换
+	const [state, , set] = useToggle(states[0], states[1]);
 
 	const handleClick = () => {
 		const nextIndex = (currentIndex + 1) % states.length;
 		setCurrentIndex(nextIndex);
-		toggle();
-		// 如果需要循环切换多个状态，可以使用 set 方法
-		// set(states[nextIndex]);
+		// 使用 set 方法设置下一个状态，实现真正的多状态循环切换
+		set(states[nextIndex]);
 	};
 
 	return (

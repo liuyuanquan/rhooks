@@ -1,4 +1,5 @@
-import { useState, useCallback } from "react";
+import { useCallback } from "react";
+import { useToggle } from "./useToggle";
 
 /**
  * 用于管理布尔值的 hook
@@ -6,23 +7,21 @@ import { useState, useCallback } from "react";
  * @returns 返回当前值和操作对象
  */
 export function useBoolean(initialValue: boolean = false) {
-	const [state, setState] = useState(initialValue);
+	// 使用 useToggle 实现，默认值为 initialValue，反向值为 !initialValue
+	const [state, toggleToggle, set] = useToggle(initialValue, !initialValue);
 
+	// 保持原有的 API 接口
 	const toggle = useCallback(() => {
-		setState((prev) => !prev);
-	}, []);
+		toggleToggle();
+	}, [toggleToggle]);
 
 	const setTrue = useCallback(() => {
-		setState(true);
-	}, []);
+		set(true);
+	}, [set]);
 
 	const setFalse = useCallback(() => {
-		setState(false);
-	}, []);
-
-	const set = useCallback((value: boolean) => {
-		setState(value);
-	}, []);
+		set(false);
+	}, [set]);
 
 	return [state, { toggle, setTrue, setFalse, set }] as const;
 }

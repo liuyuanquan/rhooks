@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.9] - 2025-12-02
+
+### Updated
+
+- 使用 useToggle 实现 useBoolean Hook，复用代码逻辑
+- 保持 useBoolean 的原有 API 接口不变
+- 修复了 ToggleDemo 中的未使用变量警告
+
 ## [1.1.8] - 2025-12-02
 
 ### Updated
