@@ -17,7 +17,8 @@ yarn add rhooks
 - [`useToggle`](#usetoggle) - Toggle boolean values
 - [`useBoolean`](#useboolean) - Manage boolean state with multiple methods
 - [`useDebounceFn`](#usedebouncefn) - Debounce function execution
-- [`useThrottle`](#usethrottle) - Throttle function execution
+- [`useThrottle`](#usethrottle) - Throttle value changes
+- [`useThrottleFn`](#usethrottlefn) - Throttle function execution
 - [`useLocalStorageState`](#uselocalstoragestate) - Manage state with localStorage persistence
 - [`usePrevious`](#useprevious) - Access previous prop or state values
 - [`useClickAway`](#useclickaway) - Detect clicks outside of one or more elements
@@ -117,6 +118,41 @@ const result = flush();
 - `leading`: 是否在延迟开始前调用函数，默认 false
 - `trailing`: 是否在延迟结束后调用函数，默认 true
 - `maxWait`: 最大等待时间（毫秒），用于设置防抖函数的最大延迟时间
+
+### useThrottleFn
+
+节流函数 Hook，用于节流执行函数。在固定时间间隔内最多执行一次。
+
+```tsx
+import { useThrottleFn } from "rhooks";
+
+const { run, cancel, flush } = useThrottleFn(
+	(value: string) => {
+		console.log(value);
+	},
+	{ wait: 500 }
+);
+
+// 调用 run 来触发节流
+run("hello");
+
+// 取消待执行的节流函数
+cancel();
+
+// 立即执行并返回结果
+const result = flush();
+```
+
+#### 配置选项
+
+- `wait`: 节流等待时间（毫秒），默认 1000ms
+- `leading`: 是否在延迟开始前调用函数，默认 true
+- `trailing`: 是否在延迟结束后调用函数，默认 true
+
+#### 与 useDebounceFn 的区别
+
+- **防抖（Debounce）**：在事件停止触发后执行，适合搜索框输入、窗口 resize 等场景
+- **节流（Throttle）**：在固定时间间隔内最多执行一次，适合滚动事件、鼠标移动等场景
 
 ### useThrottle
 

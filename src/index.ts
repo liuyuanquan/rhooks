@@ -5,6 +5,7 @@
 export { useToggle } from "./useToggle";
 export { useDebounceFn } from "./useDebounceFn";
 export { useThrottle } from "./useThrottle";
+export { useThrottleFn } from "./useThrottleFn";
 export { usePrevious } from "./usePrevious";
 export { useWindowSize } from "./useWindowSize";
 export { useCounter } from "./useCounter";

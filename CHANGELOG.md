@@ -5,6 +5,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.4.0] - 2025-12-02
+
+### Added
+
+- 添加 `useThrottleFn` Hook，用于节流执行函数
+  - 支持 run、cancel、flush 方法
+  - 支持配置 wait、leading、trailing 选项
+  - 支持泛型类型
+  - 在固定时间间隔内最多执行一次
+- 添加 ThrottleFnDemo 组件，展示 useThrottleFn Hook 的各种用法
+  - 基本用法示例
+  - Leading 模式示例
+  - Trailing 模式示例
+  - Leading 和 Trailing 同时开启示例
+  - 滚动节流示例
+
 ## [1.3.0] - 2025-12-02
 
 ### Removed

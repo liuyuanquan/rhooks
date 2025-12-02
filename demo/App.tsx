@@ -10,6 +10,7 @@ import LocalStorageStateDemo from "./components/LocalStorageStateDemo";
 import PreviousDemo from "./components/PreviousDemo";
 import ToggleDemo from "./components/ToggleDemo";
 import DebounceFnDemo from "./components/DebounceFnDemo";
+import ThrottleFnDemo from "./components/ThrottleFnDemo";
 
 function App() {
 	return (
@@ -27,6 +28,7 @@ function App() {
 			<PreviousDemo />
 			<ToggleDemo />
 			<DebounceFnDemo />
+			<ThrottleFnDemo />
 		</div>
 	);
 }
