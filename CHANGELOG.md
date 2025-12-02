@@ -5,6 +5,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.8] - 2025-12-02
+
+### Updated
+
+- 扩展 useToggle Hook，支持在两个任意类型的值之间切换
+- 更新 useToggle Hook 的 API，返回 [state, toggle, set] 格式
+- 添加 useToggle Hook 的泛型支持，支持 T 和 U 两种类型
+
+### Added
+
+- 添加 ToggleDemo 组件，展示 useToggle Hook 的多种用法
+  - 基本用法：在「开」和「关」之间切换
+  - 多状态切换：循环切换多个状态
+
 ## [1.1.7] - 2025-12-02
 
 ### Fixed

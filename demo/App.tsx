@@ -8,6 +8,7 @@ import RequestDemo from "./components/RequestDemo";
 import BooleanDemo from "./components/BooleanDemo";
 import LocalStorageStateDemo from "./components/LocalStorageStateDemo";
 import PreviousDemo from "./components/PreviousDemo";
+import ToggleDemo from "./components/ToggleDemo";
 
 function App() {
 	return (
@@ -23,6 +24,7 @@ function App() {
 			<BooleanDemo />
 			<LocalStorageStateDemo />
 			<PreviousDemo />
+			<ToggleDemo />
 		</div>
 	);
 }
