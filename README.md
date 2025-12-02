@@ -5,11 +5,11 @@ A collection of useful React hooks built with TypeScript.
 ## Installation
 
 ```bash
-npm install rhooks
+npm install @xumi/rhooks
 # or
-pnpm add rhooks
+pnpm add @xumi/rhooks
 # or
-yarn add rhooks
+yarn add @xumi/rhooks
 ```
 
 ## Available Hooks
@@ -17,7 +17,6 @@ yarn add rhooks
 - [`useToggle`](#usetoggle) - Toggle boolean values
 - [`useBoolean`](#useboolean) - Manage boolean state with multiple methods
 - [`useDebounceFn`](#usedebouncefn) - Debounce function execution
-- [`useThrottle`](#usethrottle) - Throttle value changes
 - [`useThrottleFn`](#usethrottlefn) - Throttle function execution
 - [`useLocalStorageState`](#uselocalstoragestate) - Manage state with localStorage persistence
 - [`usePrevious`](#useprevious) - Access previous prop or state values
@@ -26,11 +25,12 @@ yarn add rhooks
 - [`useCounter`](#usecounter) - Counter with increment, decrement, reset
 - [`useTimeout`](#usetimeout) - setTimeout wrapper
 - [`useInterval`](#useinterval) - setInterval wrapper
-- [`useFetch`](#usefetch) - Data fetching with loading and error states
 - [`useMount`](#usemount) - Run effect on mount only
 - [`useUnmount`](#useunmount) - Run effect on unmount only
 - [`useUpdateEffect`](#useupdateeffect) - Run effect on updates only
 - [`useScroll`](#usescroll) - Get scroll position of an element
+- [`useHover`](#usehover) - Detect mouse hover state
+- [`useRequest`](#userequest) - Powerful async data management Hook
 
 ## Hook Details
 
@@ -39,7 +39,7 @@ yarn add rhooks
 用于切换布尔值的 hook。
 
 ```tsx
-import { useToggle } from 'rhooks'
+import { useToggle } from '@xumi/rhooks'
 
 const [isOpen, toggle, open, close] = useToggle(false)
 
@@ -53,7 +53,7 @@ const [isOpen, toggle, open, close] = useToggle(false)
 用于管理布尔值状态的 hook，返回包含多个方法的对象。
 
 ```tsx
-import { useBoolean } from 'rhooks'
+import { useBoolean } from '@xumi/rhooks'
 
 const [isOpen, { toggle, setTrue, setFalse, set }] = useBoolean(false)
 
@@ -68,23 +68,23 @@ const [isOpen, { toggle, setTrue, setFalse, set }] = useBoolean(false)
 将状态存储在 localStorage 中的 hook，页面刷新后状态依然保持。
 
 ```tsx
-import { useLocalStorageState } from 'rhooks'
+import { useLocalStorageState } from "@xumi/rhooks";
 
 // 基本用法
 const [count, setCount] = useLocalStorageState<number>("count", {
-    defaultValue: 0
+	defaultValue: 0,
 });
 
 // 使用自定义序列化和反序列化
 const [user, setUser] = useLocalStorageState<User>("user", {
-    defaultValue: { name: "John" },
-    serializer: (value) => JSON.stringify(value),
-    deserializer: (value) => JSON.parse(value)
+	defaultValue: { name: "John" },
+	serializer: (value) => JSON.stringify(value),
+	deserializer: (value) => JSON.parse(value),
 });
 
 // 使用函数作为默认值
 const [data, setData] = useLocalStorageState<Data>("data", {
-    defaultValue: () => fetchInitialData()
+	defaultValue: () => fetchInitialData(),
 });
 ```
 
@@ -93,7 +93,7 @@ const [data, setData] = useLocalStorageState<Data>("data", {
 防抖函数 Hook，用于防抖执行函数。
 
 ```tsx
-import { useDebounceFn } from "rhooks";
+import { useDebounceFn } from "@xumi/rhooks";
 
 const { run, cancel, flush } = useDebounceFn(
 	(value: string) => {
@@ -124,7 +124,7 @@ const result = flush();
 节流函数 Hook，用于节流执行函数。在固定时间间隔内最多执行一次。
 
 ```tsx
-import { useThrottleFn } from "rhooks";
+import { useThrottleFn } from "@xumi/rhooks";
 
 const { run, cancel, flush } = useThrottleFn(
 	(value: string) => {
@@ -154,23 +154,12 @@ const result = flush();
 - **防抖（Debounce）**：在事件停止触发后执行，适合搜索框输入、窗口 resize 等场景
 - **节流（Throttle）**：在固定时间间隔内最多执行一次，适合滚动事件、鼠标移动等场景
 
-### useThrottle
-
-节流 hook，限制执行频率。
-
-```tsx
-import { useThrottle } from "rhooks";
-
-const [scrollY, setScrollY] = useState(0);
-const throttledScrollY = useThrottle(scrollY, 100);
-```
-
 ### usePrevious
 
 获取上一次的值。
 
 ```tsx
-import { usePrevious } from "rhooks";
+import { usePrevious } from "@xumi/rhooks";
 
 const [count, setCount] = useState(0);
 const prevCount = usePrevious(count);
@@ -181,7 +170,7 @@ const prevCount = usePrevious(count);
 获取窗口尺寸。
 
 ```tsx
-import { useWindowSize } from "rhooks";
+import { useWindowSize } from "@xumi/rhooks";
 
 const { width, height } = useWindowSize();
 
@@ -197,7 +186,7 @@ return (
 计数器 hook。
 
 ```tsx
-import { useCounter } from 'rhooks'
+import { useCounter } from '@xumi/rhooks'
 
 const [count, increment, decrement, reset, setCount] = useCounter(0)
 
@@ -211,7 +200,7 @@ const [count, increment, decrement, reset, setCount] = useCounter(0)
 定时器 hook。
 
 ```tsx
-import { useTimeout } from "rhooks";
+import { useTimeout } from "@xumi/rhooks";
 
 const clear = useTimeout(() => {
 	console.log("Executed after 1 second");
@@ -226,7 +215,7 @@ clear();
 循环定时器 hook。
 
 ```tsx
-import { useInterval } from "rhooks";
+import { useInterval } from "@xumi/rhooks";
 import { useState, useRef } from "react";
 
 const [count, setCount] = useState(0);
@@ -249,26 +238,12 @@ const { clear: clear2 } = useInterval(
 clear();
 ```
 
-### useFetch
-
-数据获取 hook。
-
-```tsx
-import { useFetch } from "rhooks";
-
-const { data, loading, error, refetch } = useFetch<User>("/api/user");
-
-if (loading) return <div>Loading...</div>;
-if (error) return <div>Error: {error.message}</div>;
-return <div>{data?.name}</div>;
-```
-
 ### useMount
 
 组件挂载时执行。
 
 ```tsx
-import { useMount } from "rhooks";
+import { useMount } from "@xumi/rhooks";
 
 useMount(() => {
 	console.log("Component mounted");
@@ -280,7 +255,7 @@ useMount(() => {
 组件卸载时执行。
 
 ```tsx
-import { useUnmount } from "rhooks";
+import { useUnmount } from "@xumi/rhooks";
 
 useUnmount(() => {
 	console.log("Component unmounted");
@@ -292,7 +267,7 @@ useUnmount(() => {
 只在依赖更新时执行的 effect，跳过首次渲染。
 
 ```tsx
-import { useUpdateEffect } from "rhooks";
+import { useUpdateEffect } from "@xumi/rhooks";
 
 useUpdateEffect(() => {
 	console.log("Updated:", count);
@@ -300,6 +275,51 @@ useUpdateEffect(() => {
 ```
 
 ### useScroll
+
+获取元素的滚动位置。
+
+```tsx
+import { useScroll } from "@xumi/rhooks";
+import React, { useRef } from "react";
+
+function Demo() {
+	const scrollRef = useRef(null);
+	const scroll = useScroll(scrollRef);
+
+	return (
+		<div>
+			<p>滚动位置: {JSON.stringify(scroll)}</p>
+			<div
+				style={{
+					width: 300,
+					height: 200,
+					border: "1px solid #e8e8e8",
+					overflow: "auto",
+				}}
+				ref={scrollRef}
+			>
+				<div style={{ height: 500, width: 500 }}>
+					这是一个可滚动的区域，请尝试滚动查看效果
+				</div>
+			</div>
+		</div>
+	);
+}
+```
+
+### useHover
+
+鼠标悬停状态 hook，用于检测元素是否被鼠标悬停。
+
+```tsx
+import { useHover } from "@xumi/rhooks";
+
+function Demo() {
+	const [ref, isHovered] = useHover();
+
+	return <div ref={ref}>{isHovered ? "鼠标悬停中" : "鼠标未悬停"}</div>;
+}
+```
 
 ### useRequest
 
@@ -349,7 +369,7 @@ const { data, error, loading, run, cancel, refresh, reset } = useRequest(
 #### 使用示例
 
 ```tsx
-import { useRequest } from "rhooks";
+import { useRequest } from "@xumi/rhooks";
 
 // 基本用法
 const { data, error, loading, run } = useRequest(async () => {
@@ -390,7 +410,7 @@ const { data, refresh } = useRequest(
 点击外部区域检测，支持单个或多个目标元素。
 
 ```tsx
-import { useClickAway } from "rhooks";
+import { useClickAway } from "@xumi/rhooks";
 
 // 单个目标元素
 const ref = useRef<HTMLDivElement>(null);
@@ -413,43 +433,6 @@ return (
 );
 ```
 
-获取元素的滚动位置。
-
-```tsx
-import { useScroll } from "rhooks";
-import React, { useRef } from "react";
-
-function Demo() {
-	const scrollRef = useRef(null);
-	const scroll = useScroll(scrollRef);
-
-	return (
-		<div>
-			<p>滚动位置: {JSON.stringify(scroll)}</p>
-			<div
-				style={{
-					width: 300,
-					height: 200,
-					border: "1px solid #e8e8e8",
-					overflow: "auto",
-				}}
-				ref={scrollRef}
-			>
-				<div style={{ height: 500, width: 500 }}>
-					这是一个可滚动的区域，请尝试滚动查看效果
-				</div>
-			</div>
-		</div>
-	);
-}
-```
-
 ## License
 
 MIT
-
-## 更新日志
-
-### v1.1.2
-
-- 清理项目结构，移除未使用的 commit-helper.js 脚本文件和空的 scripts 目录
