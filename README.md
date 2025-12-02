@@ -15,9 +15,11 @@ yarn add rhooks
 ## Available Hooks
 
 - [`useToggle`](#usetoggle) - Toggle boolean values
+- [`useBoolean`](#useboolean) - Manage boolean state with multiple methods
 - [`useDebounce`](#usedebounce) - Debounce value changes
 - [`useThrottle`](#usethrottle) - Throttle function execution
 - [`useLocalStorage`](#uselocalstorage) - Manage localStorage values
+- [`useLocalStorageState`](#uselocalstoragestate) - Manage state with localStorage persistence
 - [`usePrevious`](#useprevious) - Access previous prop or state values
 - [`useClickAway`](#useclickaway) - Detect clicks outside of one or more elements
 - [`useWindowSize`](#usewindowsize) - Get window dimensions
@@ -44,6 +46,46 @@ const [isOpen, toggle, open, close] = useToggle(false)
 <button onClick={toggle}>Toggle</button>
 <button onClick={open}>Open</button>
 <button onClick={close}>Close</button>
+```
+
+### useBoolean
+
+用于管理布尔值状态的 hook，返回包含多个方法的对象。
+
+```tsx
+import { useBoolean } from 'rhooks'
+
+const [isOpen, { toggle, setTrue, setFalse, set }] = useBoolean(false)
+
+<button onClick={toggle}>Toggle</button>
+<button onClick={setTrue}>Open</button>
+<button onClick={setFalse}>Close</button>
+<button onClick={() => set(true)}>Set True</button>
+```
+
+### useLocalStorageState
+
+将状态存储在 localStorage 中的 hook，页面刷新后状态依然保持。
+
+```tsx
+import { useLocalStorageState } from 'rhooks'
+
+// 基本用法
+const [count, setCount] = useLocalStorageState<number>("count", {
+    defaultValue: 0
+});
+
+// 使用自定义序列化和反序列化
+const [user, setUser] = useLocalStorageState<User>("user", {
+    defaultValue: { name: "John" },
+    serializer: (value) => JSON.stringify(value),
+    deserializer: (value) => JSON.parse(value)
+});
+
+// 使用函数作为默认值
+const [data, setData] = useLocalStorageState<Data>("data", {
+    defaultValue: () => fetchInitialData()
+});
 ```
 
 ### useDebounce

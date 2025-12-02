@@ -5,6 +5,7 @@ import PopupDemo from "./components/PopupDemo";
 import IntervalDemo from "./components/IntervalDemo";
 import TimeoutDemo from "./components/TimeoutDemo";
 import RequestDemo from "./components/RequestDemo";
+import BooleanDemo from "./components/BooleanDemo";
 
 function App() {
 	return (
@@ -17,6 +18,7 @@ function App() {
 			<IntervalDemo />
 			<TimeoutDemo />
 			<RequestDemo />
+			<BooleanDemo />
 		</div>
 	);
 }

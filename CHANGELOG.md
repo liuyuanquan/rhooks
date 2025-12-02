@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.5] - 2025-12-02
+
+### Added
+
+- 添加 useBoolean hook，用于管理布尔值状态
+- 添加 useBoolean hook 的文档和示例
+
+### Fixed
+
+- 修复 BooleanDemo 中的 CSS 样式错误，移除不支持的伪类选择器
+
 ## [1.1.4] - 2025-12-02
 
 ### Fixed
