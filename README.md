@@ -16,7 +16,7 @@ yarn add rhooks
 
 - [`useToggle`](#usetoggle) - Toggle boolean values
 - [`useBoolean`](#useboolean) - Manage boolean state with multiple methods
-- [`useDebounce`](#usedebounce) - Debounce value changes
+- [`useDebounceFn`](#usedebouncefn) - Debounce function execution
 - [`useThrottle`](#usethrottle) - Throttle function execution
 - [`useLocalStorageState`](#uselocalstoragestate) - Manage state with localStorage persistence
 - [`usePrevious`](#useprevious) - Access previous prop or state values
@@ -87,21 +87,36 @@ const [data, setData] = useLocalStorageState<Data>("data", {
 });
 ```
 
-### useDebounce
+### useDebounceFn
 
-防抖 hook，延迟执行。
+防抖函数 Hook，用于防抖执行函数。
 
 ```tsx
-import { useDebounce } from "rhooks";
+import { useDebounceFn } from "rhooks";
 
-const [input, setInput] = useState("");
-const debouncedInput = useDebounce(input, 500);
+const { run, cancel, flush } = useDebounceFn(
+	(value: string) => {
+		console.log(value);
+	},
+	{ wait: 500 }
+);
 
-useEffect(() => {
-	// 在用户停止输入 500ms 后执行
-	console.log(debouncedInput);
-}, [debouncedInput]);
+// 调用 run 来触发防抖
+run("hello");
+
+// 取消待执行的防抖函数
+cancel();
+
+// 立即执行并返回结果
+const result = flush();
 ```
+
+#### 配置选项
+
+- `wait`: 防抖等待时间（毫秒），默认 1000ms
+- `leading`: 是否在延迟开始前调用函数，默认 false
+- `trailing`: 是否在延迟结束后调用函数，默认 true
+- `maxWait`: 最大等待时间（毫秒），用于设置防抖函数的最大延迟时间
 
 ### useThrottle
 

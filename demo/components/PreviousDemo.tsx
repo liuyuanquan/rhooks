@@ -146,7 +146,7 @@ const ObjectPropertyMonitor: React.FC = () => {
 				>
 					<h4>最近的变化:</h4>
 					<ul>
-						{changes.map((change: any, index: number) => (
+						{changes.map((change: ChangeRecord, index: number) => (
 							<li key={index}>
 								{change.property}: {String(change.from)} → {String(change.to)}
 							</li>

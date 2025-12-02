@@ -5,6 +5,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.3.0] - 2025-12-02
+
+### Removed
+
+- 移除 `useDebounce` Hook，统一使用 `useDebounceFn` 进行防抖处理
+
+### Updated
+
+- 优化 `useDebounceFn` Hook 的实现
+  - 统一函数执行逻辑，`execute()` 和 `flush()` 行为一致
+  - 移除冗余的 `isLeadingCalledRef` 变量
+  - 优化代码注释，提高可读性
+  - 修复 `flush()` 函数可能执行两次的问题
+
 ## [1.2.1] - 2025-12-02
 
 ### Added

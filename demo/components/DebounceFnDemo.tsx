@@ -1,156 +1,161 @@
-import React, { useState } from "react";
+import React from "react";
 import { useDebounceFn } from "../../src";
 
-const DebounceFnDemo: React.FC = () => {
-	const [count, setCount] = useState(0);
-	const [inputValue, setInputValue] = useState("");
-	const [debouncedValue, setDebouncedValue] = useState("");
-	const [leadingValue, setLeadingValue] = useState("");
-	const [maxWaitValue, setMaxWaitValue] = useState("");
-
-	// 基本用法
-	const { run, cancel, flush } = useDebounceFn(
-		(value) => {
-			setCount((prev) => prev + 1);
-			setDebouncedValue(value);
+// 基本用法示例
+const Demo: React.FC = () => {
+	const [value, setValue] = React.useState(0);
+	const { run } = useDebounceFn(
+		() => {
+			setValue(value + 1);
 		},
-		{ wait: 500 }
+		{
+			wait: 500,
+		}
 	);
-
-	// 配置 leading: true
-	const { run: runLeading } = useDebounceFn(
-		(value) => {
-			setLeadingValue(value);
-		},
-		{ wait: 500, leading: true }
-	);
-
-	// 配置 maxWait
-	const { run: runMaxWait } = useDebounceFn(
-		(value) => {
-			setMaxWaitValue(value);
-		},
-		{ wait: 1000, maxWait: 2000 }
-	);
-
-	// 处理输入变化
-	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		const value = e.target.value;
-		setInputValue(value);
-		run(value);
-		runLeading(value);
-		runMaxWait(value);
-	};
 
 	return (
-		<div
-			style={{
-				marginBottom: "20px",
-				padding: "15px",
-				border: "1px solid #ccc",
-				borderRadius: "8px",
-			}}
-		>
-			<h2>useDebounceFn Hook Demo</h2>
-
-			{/* 输入区域 */}
-			<div style={demoSectionStyle}>
-				<h3>输入区域</h3>
-				<div style={{ marginBottom: "10px" }}>
-					<input
-						type="text"
-						value={inputValue}
-						onChange={handleInputChange}
-						placeholder="输入一些内容..."
-						style={{
-							padding: "8px",
-							width: "300px",
-							fontSize: "14px",
-							border: "1px solid #ccc",
-							borderRadius: "4px",
-						}}
-					/>
-				</div>
-				<div style={{ display: "flex", gap: "10px", marginTop: "10px" }}>
-					<button onClick={() => run(inputValue)} style={buttonStyle}>
-						触发执行
-					</button>
-					<button
-						onClick={cancel}
-						style={{ ...buttonStyle, backgroundColor: "#dc3545" }}
-					>
-						取消
-					</button>
-					<button
-						onClick={flush}
-						style={{ ...buttonStyle, backgroundColor: "#28a745" }}
-					>
-						立即执行
-					</button>
-				</div>
-			</div>
-
-			{/* 基本用法 */}
-			<div style={demoSectionStyle}>
-				<h3>1. 基本用法 (wait: 500ms)</h3>
-				<p>执行次数: {count}</p>
-				<p>防抖后的值: {debouncedValue}</p>
-				<p>配置: wait: 500ms, leading: false, trailing: true</p>
-			</div>
-
-			{/* leading: true */}
-			<div style={demoSectionStyle}>
-				<h3>2. Leading 模式 (leading: true, wait: 500ms)</h3>
-				<p>Leading 值: {leadingValue}</p>
-				<p>配置: wait: 500ms, leading: true, trailing: true</p>
-				<p>特点: 在延迟开始前调用函数</p>
-			</div>
-
-			{/* maxWait */}
-			<div style={demoSectionStyle}>
-				<h3>3. MaxWait 限制 (maxWait: 2000ms)</h3>
-				<p>MaxWait 值: {maxWaitValue}</p>
-				<p>配置: wait: 1000ms, maxWait: 2000ms</p>
-				<p>特点: 最大等待时间为 2000ms，超过后会立即执行</p>
-			</div>
-
-			{/* 用法说明 */}
-			<div style={demoSectionStyle}>
-				<h3>方法说明</h3>
-				<ul style={{ paddingLeft: "20px", margin: 0 }}>
-					<li>
-						<strong>run</strong>: 触发执行防抖函数，函数参数将会传递给原始函数
-					</li>
-					<li>
-						<strong>cancel</strong>: 取消当前防抖，清除定时器
-					</li>
-					<li>
-						<strong>flush</strong>: 立即调用当前防抖函数，并清除定时器
-					</li>
-				</ul>
-			</div>
+		<div>
+			<p>当前值: {value}</p>
+			<button onClick={run}>点击 +1</button>
 		</div>
 	);
 };
 
-// 样式定义
-const demoSectionStyle: React.CSSProperties = {
-	marginBottom: "20px",
-	padding: "15px",
-	backgroundColor: "#fafafa",
-	borderRadius: "8px",
-	border: "1px solid #e0e0e0",
+// Leading 模式示例
+const LeadingDemo: React.FC = () => {
+	const [value, setValue] = React.useState(0);
+	const { run } = useDebounceFn(
+		() => {
+			setValue(value + 1);
+		},
+		{
+			wait: 500,
+			leading: true, // 在延迟开始前执行
+			trailing: false, // 在延迟结束后不执行
+		}
+	);
+
+	return (
+		<div>
+			<p>当前值: {value}</p>
+			<p>点击按钮会立即执行，但 500ms 内重复点击不会重复触发</p>
+			<button onClick={run}>点击 +1</button>
+		</div>
+	);
 };
 
-const buttonStyle: React.CSSProperties = {
-	padding: "8px 16px",
-	border: "none",
-	borderRadius: "4px",
-	backgroundColor: "#007bff",
-	color: "white",
-	cursor: "pointer",
-	fontSize: "14px",
-	transition: "background-color 0.2s",
+// 取消示例
+const CancelDemo: React.FC = () => {
+	const [value, setValue] = React.useState(0);
+	const { run, cancel } = useDebounceFn(
+		() => {
+			setValue(value + 1);
+		},
+		{
+			wait: 1000,
+		}
+	);
+
+	return (
+		<div>
+			<p>当前值: {value}</p>
+			<button onClick={run}>点击 +1 (延迟 1 秒)</button>
+			<button onClick={cancel} style={{ marginLeft: 8 }}>
+				取消
+			</button>
+		</div>
+	);
+};
+
+// 搜索示例
+const SearchDemo: React.FC = () => {
+	const [searchTerm, setSearchTerm] = React.useState("");
+	const [results, setResults] = React.useState<string[]>([]);
+	const [loading, setLoading] = React.useState(false);
+
+	const { run: debouncedSearch } = useDebounceFn(
+		async (value: string) => {
+			if (!value) {
+				setResults([]);
+				return;
+			}
+
+			setLoading(true);
+			try {
+				// 模拟 API 请求
+				await new Promise((resolve) => setTimeout(resolve, 500));
+				// 假设这是搜索结果
+				setResults(
+					["苹果", "香蕉", "橙子", "葡萄", "西瓜"].filter((item) =>
+						item.includes(value)
+					)
+				);
+			} finally {
+				setLoading(false);
+			}
+		},
+		{
+			wait: 500,
+			leading: true,
+		}
+	);
+
+	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		const value = e.target.value;
+		setSearchTerm(value);
+		debouncedSearch(value);
+	};
+
+	return (
+		<div>
+			<input
+				value={searchTerm}
+				onChange={handleChange}
+				placeholder="输入水果名称搜索"
+				style={{ width: 200 }}
+			/>
+			{loading ? (
+				<p>加载中...</p>
+			) : (
+				<ul>
+					{results.map((item, index) => (
+						<li key={index}>{item}</li>
+					))}
+				</ul>
+			)}
+		</div>
+	);
+};
+
+// 主组件
+const DebounceFnDemo: React.FC = () => {
+	return (
+		<div
+			style={{
+				marginBottom: "20px",
+				padding: "10px",
+				border: "1px solid #ccc",
+			}}
+		>
+			<h2>useDebounceFn Hook Demo</h2>
+			<div style={{ marginBottom: "20px" }}>
+				<h3>1. 基本用法</h3>
+				<Demo />
+			</div>
+			<div style={{ marginBottom: "20px" }}>
+				<h3>2. Leading 模式</h3>
+				<LeadingDemo />
+			</div>
+			<div style={{ marginBottom: "20px" }}>
+				<h3>3. 取消示例</h3>
+				<CancelDemo />
+			</div>
+			<div style={{ marginBottom: "20px" }}>
+				<h3>4. 搜索示例</h3>
+				<SearchDemo />
+			</div>
+		</div>
+	);
 };
 
 export default DebounceFnDemo;

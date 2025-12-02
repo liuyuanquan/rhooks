@@ -3,7 +3,6 @@
  */
 
 export { useToggle } from "./useToggle";
-export { useDebounce } from "./useDebounce";
 export { useDebounceFn } from "./useDebounceFn";
 export { useThrottle } from "./useThrottle";
 export { usePrevious } from "./usePrevious";
