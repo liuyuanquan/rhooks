@@ -5,6 +5,24 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.7] - 2025-12-02
+
+### Fixed
+
+- 修复 usePrevious Hook 的值更新时机问题，确保正确获取上一次的值
+- 修复 PreviousDemo 中的类型错误，添加 ChangeRecord 接口定义
+
+### Added
+
+- 添加 PreviousDemo 组件，展示 usePrevious Hook 的多种用法
+  - CompareChanges：比较值的变化方向
+  - ObjectPropertyMonitor：监控对象属性变化
+
+### Updated
+
+- 优化 ObjectPropertyMonitor 组件的变化记录逻辑，确保每个属性只显示最新的一次变化
+- 更新 usePrevious Hook 的实现，从 useEffect 改为直接在渲染期间更新 ref
+
 ## [1.1.6] - 2025-12-02
 
 ### Removed

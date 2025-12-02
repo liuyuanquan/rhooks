@@ -1,25 +1,19 @@
-import { useRef, useEffect } from 'react'
+import { useRef } from "react";
 
 /**
  * 获取上一次的值
  * @param value 当前值
  * @returns 上一次的值
- * 
- * @example
- * ```tsx
- * const [count, setCount] = useState(0)
- * const prevCount = usePrevious(count)
- * 
- * // count: 1, prevCount: 0
- * ```
  */
 export function usePrevious<T>(value: T): T | undefined {
-    const ref = useRef<T>()
+	const currentRef = useRef<T | undefined>(undefined);
+	const previousRef = useRef<T | undefined>(undefined);
 
-    useEffect(() => {
-        ref.current = value
-    }, [value])
+	// 在渲染期间更新 ref，确保获取正确的上一次值
+	if (currentRef.current !== value) {
+		previousRef.current = currentRef.current;
+		currentRef.current = value;
+	}
 
-    return ref.current
+	return previousRef.current;
 }
-
