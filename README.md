@@ -7,11 +7,11 @@ A collection of useful React hooks built with TypeScript.
 ## Installation
 
 ```bash
-npm install @xumi/rhooks
+npm install @xumi/rhooks@1.5.4
 # or
-pnpm add @xumi/rhooks
+pnpm add @xumi/rhooks@1.5.4
 # or
-yarn add @xumi/rhooks
+yarn add @xumi/rhooks@1.5.4
 ```
 
 ## Available Hooks

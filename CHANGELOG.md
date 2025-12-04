@@ -5,6 +5,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.5.4] - 2025-12-02
+
+### Removed
+
+- 移除未使用的 ESLint 相关依赖项
+  - `@typescript-eslint/eslint-plugin`
+  - `@typescript-eslint/parser`
+  - `eslint`
+- 移除 `lint` 脚本命令
+
+### Changed
+
+- 优化依赖项配置，减少包体积
+- 简化项目配置，移除未使用的工具
+
 ## [1.5.3] - 2025-12-02
 
 ### Fixed

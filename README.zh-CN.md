@@ -7,11 +7,11 @@
 ## 安装
 
 ```bash
-npm install @xumi/rhooks
+npm install @xumi/rhooks@1.5.4
 # 或
-pnpm add @xumi/rhooks
+pnpm add @xumi/rhooks@1.5.4
 # 或
-yarn add @xumi/rhooks
+yarn add @xumi/rhooks@1.5.4
 ```
 
 ## 可用的 Hooks
