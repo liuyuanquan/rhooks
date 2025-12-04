@@ -7,11 +7,26 @@
 ## 安装
 
 ```bash
+# 安装指定版本
 npm install @xumi/rhooks@1.5.4
 # 或
 pnpm add @xumi/rhooks@1.5.4
 # 或
 yarn add @xumi/rhooks@1.5.4
+
+# 安装最新版本
+npm install @xumi/rhooks@latest
+# 或
+pnpm add @xumi/rhooks@latest
+# 或
+yarn add @xumi/rhooks@latest
+
+# 安装最新版本（不指定标签时默认行为）
+npm install @xumi/rhooks
+# 或
+pnpm add @xumi/rhooks
+# 或
+yarn add @xumi/rhooks
 ```
 
 ## 可用的 Hooks
